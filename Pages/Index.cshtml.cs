@@ -32,9 +32,19 @@ namespace Neemah.Pages
         [BindProperty]
         public IFormFile NewImageFile { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            var username = User.Identity?.Name;
+            var user = _db.Users.FirstOrDefault(u => u.Username == username);
+
+            if (user == null || !(user.UserType == "Admin" || user.UserType == "User1"))
+            {
+                return RedirectToPage("/login");
+            }
+
             Products = await _db.Products.ToListAsync();
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
