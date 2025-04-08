@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -50,9 +50,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/AddProduct">Add Product</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/EditProduct">Edit Product</a>
-                            </li>
                         }
 
                         <!-- User1 Links -->
@@ -72,6 +69,9 @@
                         <!-- User2 Links -->
                         @if (currentUser?.UserType == "Admin" || currentUser?.UserType == "User2")
                         {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/EditProduct">Edit Product</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/ProductOrdersToday">Product Orders Today</a>
                             </li>
