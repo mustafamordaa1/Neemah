@@ -1,0 +1,59 @@
+﻿@page
+@model Neemah.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Home - Neemah";
+}
+
+<div class="container text-center">
+    <h2 class="mt-4">Welcome to Neemah!</h2>
+    <p class="lead">Your one-stop solution for factory order management, product summaries, and much more.</p>
+    
+    <!-- Feature Descriptions -->
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Factory Orders</h5>
+                    <p class="card-text">Add and view factory orders across different branches. Track the status of your orders easily.</p>
+                    <a href="/AddFactoryOrder" class="btn btn-primary">Add Factory Order</a>
+                    <a href="/ViewFactoryOrders" class="btn btn-outline-primary mt-2">View/Manage Orders</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Product Branch Summary</h5>
+                    <p class="card-text">Get a detailed summary of products and their order data for each branch.</p>
+                    <a href="/ProductBranchSummary" class="btn btn-primary">View Summary</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Product Orders Today</h5>
+                    <p class="card-text">Check the orders for the day and see product specifics like raw materials, spices, etc.</p>
+                    <a href="/ProductOrdersToday" class="btn btn-primary">View Today's Orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="mt-5">
+        <h3>About Neemah</h3>
+        <p>Neemah provides an efficient and user-friendly way to manage factory orders, track products, and get real-time summaries for each branch. Our platform helps you streamline production processes and keep things organized.</p>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="mt-5">
+        <h3>Contact Us</h3>
+        <p>If you have any questions or need assistance, feel free to reach out!</p>
+        <a href="mailto:contact@neemah.com" class="btn btn-outline-secondary">Email Us</a>
+    </div>
+</div>
+

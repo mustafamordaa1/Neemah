@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Neemah</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Neemah.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- Navbar Section -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container">
+                <!-- Logo and Brand -->
+                <a class="navbar-brand" asp-page="/Index">
+                    <img src="~/logo.png" alt="Logo" style="height: 50px;" />
+                    Neemah
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Home Link -->
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Index">Home Page</a>
+                        </li>
+
+                        <!-- Admin and User-specific Links -->
+                        @using Microsoft.AspNetCore.Identity
+                        @inject Neemah.Data.AppDbContext Db
+
+                        @{
+                            var username = User.Identity?.Name;
+                            var currentUser = Db.Users.FirstOrDefault(u => u.Username == username);
+                        }
+
+                        <!-- Admin Links -->
+                        @if (currentUser?.UserType == "Admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/AddUser">Add User</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/EditDeleteUser">Manage Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/AddProduct">Add Product</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/EditProduct">Edit Product</a>
+                            </li>
+                        }
+
+                        <!-- User1 Links -->
+                        @if (currentUser?.UserType == "Admin" || currentUser?.UserType == "User1")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/AddFactoryOrder">Add Factory Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/ViewFactoryOrders">View/Manage Factory Orders</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/ProductBranchSummary">Product Branch Summary</a>
+                            </li>
+                        }
+
+                        <!-- User2 Links -->
+                        @if (currentUser?.UserType == "Admin" || currentUser?.UserType == "User2")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/ProductOrdersToday">Product Orders Today</a>
+                            </li>
+                        }
+
+                        <!-- Logout Link -->
+                        <li class="nav-item">
+                            <form asp-page="/Logout" method="post" style="display:inline">
+                                <button type="submit" class="btn btn-link nav-link" style="padding: 0;">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <main role="main" class="pt-4 pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

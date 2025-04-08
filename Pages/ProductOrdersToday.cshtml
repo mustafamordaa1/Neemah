@@ -1,0 +1,47 @@
+@page
+@model Neemah.Pages.ProductOrdersTodayModel
+@{
+    ViewData["Title"] = "Today's Product Orders";
+}
+
+<div class="container my-4">
+    <h2 class="text-center mb-4">Today's Product Orders Summary</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Product Name</th>
+                    <th>Total Orders</th>
+                    <th>Raw Materials</th>
+                    <th>Additions</th>
+                    <th>Spices Weight</th>
+                    <th>Salt Weight</th>
+                    <th>Total Sum</th>
+                    <th>Plate Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Summaries)
+                {
+                    <tr>
+                        <td>@item.ProductNameEnglish</td>
+                        <td>@item.TotalOrdersToday</td>
+                        <td>@(Math.Round(item.RawMaterials * item.TotalOrdersToday, 3))</td>
+                        <td>@(Math.Round(item.Additions * item.TotalOrdersToday, 3))</td>
+                        <td>@(Math.Round(item.SpicesWeight * item.RawMaterials * item.TotalOrdersToday, 3))</td>
+                        <td>@(Math.Round(item.SaltWeight * item.RawMaterials * item.TotalOrdersToday, 3))</td>
+                        <td>
+                            @(Math.Round(
+                                Math.Round(item.SaltWeight * item.RawMaterials * item.TotalOrdersToday, 3) + 
+                                Math.Round(item.RawMaterials * item.TotalOrdersToday, 3) + 
+                                Math.Round(item.SpicesWeight * item.RawMaterials * item.TotalOrdersToday, 3) + 
+                                Math.Round(item.Additions * item.TotalOrdersToday, 3), 3))
+                        </td>
+                        <td>@item.PlateWeight</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
