@@ -37,7 +37,7 @@ namespace Neemah.Pages
             var username = User.Identity?.Name;
             var user = _db.Users.FirstOrDefault(u => u.Username == username);
 
-            if (user == null || !(user.UserType == "Admin" || user.UserType == "User1"))
+            if (user == null || !(user.UserType == "Admin" || user.UserType == "User1" || user.UserType == "User2"))
             {
                 return RedirectToPage("/login");
             }
